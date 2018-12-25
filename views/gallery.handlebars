@@ -1,0 +1,81 @@
+<div class="container">
+    <h1 class="my-3 text-center text-lg-center">Multimedia Gallery</h1>
+
+    {{#if username}}
+        <div class="row">
+            <div class="btn-group mb-3 text-center mx-auto" id="gallery-button-group">
+                <a class="btn btn-light text-dark px-5 {{#unless isUserView}}active{{/unless}}" href="/gallery/">View full gallery</a>
+                <a class="btn btn-light text-dark px-5 {{#if isUserView}}active{{/if}}" href="/gallery/?show=usergallery">View your gallery</a>
+            </div>
+        </div>
+    {{/if}}
+
+    <div class="row text-center text-lg-center" id="main-gallery">
+        
+        {{!-- loop through all media files in the array --}}
+        {{#each gallery}}
+
+            {{#if youtubeId}}
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <iframe width="250"
+                    src="https://www.youtube.com/embed/{{youtubeId}}" allowfullscreen>
+                    </iframe>
+                    <div class="desc mb-4">
+                        <a class="btn btn-light btn-sm" href="/article/{{id}}">View article</a>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if videoFilename}}
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <video controls width="250" loop muted>  
+                        <source src="/uploads/multimedia/{{videoFilename}}" type="video/mp4"> 
+                        <source src="/uploads/multimedia/{{videoFilename}}" type="video/ogg"> 
+                        <source src="/uploads/multimedia/{{videoFilename}}" type="video/webm">
+                        Your browser does not support playback of this video.
+                    </video>   
+                    <div class="desc mb-4">
+                        <a class="btn btn-light btn-sm px-4" href="/article/{{id}}">View article</a>
+                    </div>             
+                </div>
+            {{/if}}
+
+            {{#if audioFilename}}
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <audio class="gallery-player" width="50%" controls>  
+                        <source src="/uploads/multimedia/{{audioFilename}}" type="audio/mpeg"> 
+                        <source src="/uploads/multimedia/{{audioFilename}}" type="audio/ogg"> 
+                        <source src="/uploads/multimedia/{{audioFilename}}" type="audio/wav"> 
+                        Your browser does not support playback of this audio. 
+                    </audio>
+                    <div class="desc mb-4">
+                        <a class="btn btn-light btn-sm px-4" href="/article/{{id}}">View article</a>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{#if imageFilename}}
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <a href="/uploads/images/{{imageFilename}}" class="d-block h-70">
+                        <img class="img-fluid img-thumbnail mb-1" src="/uploads/thumbnails/{{imageFilename}}" alt="">
+                    </a>
+                    <div class="desc mb-4">
+                        <a class="btn btn-light btn-sm px-4" href="/article/{{id}}">View article</a>
+                    </div>  
+                </div>
+            {{/if}}
+
+            {{#if gifFilename}}
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <a href="/uploads/images/{{gifFilename}}" class="d-block h-70">
+                        <img class="img-fluid img-thumbnail mb-1" src="/uploads/images/{{gifFilename}}" alt="">
+                    </a>
+                    <div class="desc mb-4">
+                        <a class="btn btn-light btn-sm px-4" href="/article/{{id}}">View article</a>
+                    </div>  
+                </div>
+            {{/if}}
+
+        {{/each}}        
+    </div>
+</div>

@@ -1,0 +1,93 @@
+<!-- Include external JS libs for Froala editor -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+
+<!-- Include Editor JS files. -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.5.1//js/froala_editor.pkgd.min.js"></script>
+<!-- Include Customize Video JS files. -->
+<script type="text/javascript" src="../wysiwyg-editor-node-sdk/lib/video.min.js"></script>
+<div class="row center">
+    <div class="col-12">
+        <div class="card my-2 border-0">
+            <div class="card-body">
+                <h3 class="card-title" id="signup">Add Post</h3>
+
+                <form action="/addPost" enctype="multipart/form-data" method="POST">
+                    <div class="row mb-4">
+                        <div class="col-md-12">
+                            <label class="form-control border border-0" for="title">Title:</label>
+                            <input class="form-control" type="text" id="title" name="title" required style="width: 96%;">
+                        </div>
+                    </div>
+
+                    <div class="row mb-4 ml-1">
+                        <div class="form-group" style="width: 95%;">
+                            <label for="content">Content:</label>
+                            <textarea class="edit" name="content" id="{{username}}"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fileUpload">Attach a video/audio file to your article:</label>
+                        <input class="form-control-file" type="file" id="fileUpload" name="fileUpload" accept=".mp4, .mp3, .ogg, .wav, .webm, .ogv">
+                        <small id="fileuploadtypes" class="form-text text-muted">
+                            You can upload a single file with the following extensions: .mp4, .mp3, .ogg, .wav, .webm,
+                            .ogv
+                        </small>
+                    </div>
+                    <div class="form-group float-right mt-4">
+                        <input class="btn btn-light" type="submit" value="Submit">
+                        <input class="btn btn-light" type="reset" value="Clear">
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Initialize the editor. -->
+<script>
+    $('.edit').froalaEditor({
+        heightMin: 400,// set minheight for editor
+        // set toolbar buttons
+        toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'embedly', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'clearFormatting', '|', 'spellChecker', 'help', 'html', '|', 'undo', 'redo'],
+        // set the image upload url
+        imageUploadURL: '/image_upload',
+        imageUploadParams: {
+            id: 'my_editor',
+        }
+    });
+</script>
+<!-- get the html from edit-context -->
+<script>
+    $('div#froala-editor').froalaEditor('html.get');
+    console.log($('#froala-editor').froalaEditor('html.get'))
+</script>
+<!-- Delete the image using ajax from server side -->
+<script>
+    $(function () {
+        // Catch the image being removed.
+        $('.edit').on('froalaEditor.image.removed', function (e, editor, $img) {
+            $.ajax({
+                // Request method.
+                method: 'POST',
+
+                // Request URL.
+                url: '/delete_image',
+
+                // Request params.
+                data: {
+                    src: $img.attr('src')
+                }
+            })
+                .done(function (data) {
+                    console.log('Image was deleted');
+                })
+                .fail(function (err) {
+                    console.log('Image delete problem: ' + JSON.stringify(err));
+                })
+        });
+    });
+</script>

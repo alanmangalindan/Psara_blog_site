@@ -1,0 +1,89 @@
+{{#if loggedOut}}
+<div class="alert alert-success alert-dismissable fade show" role="alert">
+    You have been logged out successfully.
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/if}}
+
+{{#if newArticleCreated}}
+<div class="alert alert-success alert-dismissable fade show" role="alert">
+    Your new post has been successfully created.
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/if}}
+
+{{#if accountUpdated}}
+<div class="alert alert-success alert-dismissable fade show" role="alert">
+    Your account has been successfully updated.
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/if}}
+
+{{#if articleDeleted}}
+<div class="alert alert-success alert-dismissable fade show" role="alert">
+    Your post has been successfully deleted.
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/if}}
+
+{{#if userDeleted}}
+<div class="alert alert-success alert-dismissable fade show" role="alert">
+    User account has been successfully deleted.
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/if}}
+
+
+{{#if articles}}
+{{#each articles}}
+<div class="row">
+    <div class="col-12">
+        <div class="card my-2 border-0">
+            <div class="card-body">
+                <h3 class="card-title" id="article-{{articleId}}"><a href="/article/{{articleId}}">{{title}}</a></h3>
+                <p><em><div class="imgContainer"><img class="display" src="/default-avatars/{{avatar}}"></div>By <strong>{{author}}</strong> on {{timestamp}}</em></p>
+                <p class="card-text">{{{content}}}</p>
+                {{#if video}}
+                    <video controls width="650" loop muted>  
+                        <source src="/uploads/multimedia/{{video}}" type="video/mp4">  
+                        <source src="/uploads/multimedia/{{video}}" type="video/ogg"> 
+                        <source src="/uploads/multimedia/{{video}}" type="video/webm">
+                        Your browser does not support playback of this video.
+                    </video>
+                {{/if}}
+                {{#if audio}}
+                    <audio controls>  
+                        <source src="/uploads/multimedia/{{audio}}" type="audio/mpeg">  
+                        <source src="/uploads/multimedia/{{audio}}" type="audio/ogg"> 
+                        <source src="/uploads/multimedia/{{audio}}" type="audio/wav"> 
+                        Your browser does not support playback of this audio. 
+                    </audio>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+
+{{else}}
+<div class="row">
+    <div class="col-12">
+        <div class="card my-2 border-0">
+            <div class="card-body">
+                <h3 class="card-title">No Blog Posts yet!</h3>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+

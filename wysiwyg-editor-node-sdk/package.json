@@ -1,0 +1,64 @@
+{
+  "_from": "wysiwyg-editor-node-sdk@^2.3.4",
+  "_id": "wysiwyg-editor-node-sdk@2.3.4",
+  "_inBundle": false,
+  "_integrity": "sha512-Y/6xXfYgMOdrGVfVmBZnwWZ4vTLreM7l9T3Xw5mSaC+VSSf9/vqkNNowkrmW2EHETGKiG1v9Rc1kCrXHKr1BQg==",
+  "_location": "/wysiwyg-editor-node-sdk",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "wysiwyg-editor-node-sdk@^2.3.4",
+    "name": "wysiwyg-editor-node-sdk",
+    "escapedName": "wysiwyg-editor-node-sdk",
+    "rawSpec": "^2.3.4",
+    "saveSpec": null,
+    "fetchSpec": "^2.3.4"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/wysiwyg-editor-node-sdk/-/wysiwyg-editor-node-sdk-2.3.4.tgz",
+  "_shasum": "d6a5200ffe88695074fa28d929c2da8315d272f4",
+  "_spec": "wysiwyg-editor-node-sdk@^2.3.4",
+  "_where": "/Users/jingyuanzhang/Desktop/cs719_teamjahmmin-26-10",
+  "author": {
+    "name": "Froala Labs"
+  },
+  "bugs": {
+    "url": "https://github.com/froala/wysiwyg-editor-node-sdk/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "busboy": "~0.2.13",
+    "crypto-js": "^3.1.6",
+    "gm": "^1.23.0",
+    "merge": "~1.2.0",
+    "sha1": "~1.1.1"
+  },
+  "deprecated": false,
+  "description": "Node.js SDK for Froala Editor",
+  "devDependencies": {
+    "body-parser": "^1.15.2",
+    "express": "~4.14.0"
+  },
+  "homepage": "https://www.froala.com/wysiwyg-editor",
+  "keywords": [
+    "froala",
+    "editor",
+    "node.js",
+    "sdk"
+  ],
+  "license": "MIT",
+  "main": "lib/froalaEditor.js",
+  "name": "wysiwyg-editor-node-sdk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/froala/wysiwyg-editor-node-sdk.git"
+  },
+  "scripts": {
+    "start": "node ./examples/server.js"
+  },
+  "version": "2.3.4"
+}

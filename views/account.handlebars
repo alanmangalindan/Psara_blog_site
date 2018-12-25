@@ -1,0 +1,135 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card my-2 border-0">
+
+            <div class="card-body">
+                <h3 class="card-title" id="signup">Edit Account Details</h3>
+                <form action="/accountUpdate" enctype="multipart/form-data" method="POST">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-control border border-0" for="fname">First Name:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="text" id="fname" name="fname" value="{{userData.fname}}"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-control border border-0" for="lname">Last Name:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="text" id="lname" name="lname" value="{{userData.lname}}"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-control border border-0" for="dob">Date of Birth:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="date" id="dob" name="dob" value="{{userData.dob}}"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-control border border-0" for="country">Country:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="text" id="country" name="country" value="{{userData.country}}"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-control border border-0" for="username">Username:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <p class="form-control border border-0">{{userData.username}}</p>
+                            <input type="hidden" name="username" value="{{userData.username}}">
+                            {{!-- changing the username will not be allowed --}}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-control border border-0" for="password">New Password:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="password" id="password" name="password" value="{{userData.password}}" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-control border border-0" for="passwordCheck">Confirm New Password:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="password" id="passwordCheck" name="passwordCheck" value="{{userData.password}}" required>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-3">
+                            <label class="form-control border border-0">Select an avatar:</label>
+                        </div>
+                        <div class="col-md-9">
+                            {{!-- display users current avatar first & selected --}}
+                            <label class="avatarSelector">
+                                <input type="radio" name="avatar" value="{{userData.avatar}}" checked required>
+                                <img src="/default-avatars/{{userData.avatar}}">
+                            </label>
+                            {{#each defaultAvatars}}
+                            <label class="avatarSelector">
+                                <input type="radio" name="avatar" value="{{this}}">
+                                <img src="/default-avatars/{{this}}">
+                            </label>
+                            {{/each}}
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-3">
+                            <label class="form-control border border-0" for="fileUpload">Upload a custom avatar:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control-file" type="file" id="fileUpload" name="fileUpload" accept=".jpg, .jpeg, .png">
+                            <small id="userUploadAvatar" class="form-text text-muted">
+                                You can upload an image file with extensions: .jpg, .jpeg, .png (a square image will look best!)
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-control border border-0" for="description">Tell us something about
+                                yourself:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <textarea class="form-control" id="description" name="description" rows="2" required>{{userData.description}}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group float-right mt-4">
+                        <input class="btn btn-light" type="submit" value="Submit">
+                        <input class="btn btn-light" type="reset" value="Clear">
+                    </div>
+
+                    {{!-- user account is set as active --}}
+                    <input type="hidden" name="activeFlag" value="1">
+                </form>
+            </div>
+            {{#if passwordFail}}
+            <div class="alert alert-danger alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p>Your password and confirmation password do not match.</p>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>

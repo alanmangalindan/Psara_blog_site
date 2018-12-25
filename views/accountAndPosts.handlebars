@@ -1,0 +1,99 @@
+{{#if commentDeleted}}
+<div class="alert alert-success alert-dismissable fade show" role="alert">
+    Your comment has been successfully deleted.
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/if}}
+
+{{#if articleDeleted}}
+<div class="alert alert-success alert-dismissable fade show" role="alert">
+    Your post has been successfully deleted.
+    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+{{/if}}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card my-2 border-0">
+            <div class="card-body text-center">
+                <img class="card-img-top" src="/default-avatars/{{userData.avatar}}">
+                <h3 class="card-title">{{userData.username}}</h3>
+                <div class="card-body px-0">
+                    <p class="card-text">{{userData.description}}</p>
+                    <form action="/account" method="POST">
+                        <div class="form-group">
+                            <input type="hidden" name="username" value="{{userData.username}}">
+                            <button class="btn mx-1 btn-light">Edit User Account</button>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn mx-1 btn-light" formaction='/deleteUser' type="submit"><em>Delete User
+                                    Account</em></button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="card my-2">
+            <div class="card-body">
+                <h3 class="card-title">My Articles</h3>
+
+                {{#if articles}}
+                {{#each articles}}
+                <div class="card border-0">
+                    <div class="card-body">
+                        <form action="/editPost" method="POST">
+                            <h4 class="card-title" id="article-{{articleId}}"><a href="/article/{{articleId}}">{{title}}</a>
+                                <input type="hidden" name="articleId" value="{{articleId}}">
+                                <input type="hidden" name="fromAccountPage" value="true">
+                                <button class="btn mx-1 btn-light">Edit</button>
+                                <button class="btn mx-1 btn-light" formaction='/deletePost' type="submit"><em>Delete</em></button>
+                            </h4>
+                        </form>
+                    </div>
+                </div>
+                {{/each}}
+                {{else}}
+                <div class="card border-0">
+                    <div class="card-body">
+                        <h3 class="card-title">You have no blog posts yet!</h3>
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="card my-2">
+            <div class="card-body">
+                <h3 class="card-title">My Comments</h3>
+
+                {{#if comments}}
+                {{#each comments}}
+                <form action="/editComment" method="POST">
+                    <p class="card-text my-2" id="comment-{{commentId}}"><a href="/article/{{articleId}}#comment-{{commentId}}">{{content}}</a>
+                        <input type="hidden" name="commentId" value="{{commentId}}">
+                        <input type="hidden" name="fromAccountPage" value="true">
+                        <button class="btn mx-1 btn-light">Edit</button>
+                        <button class="btn mx-1 btn-light" formaction='/deleteComment' type="submit"><em>Delete</em></button>
+                    </p>
+                </form>
+                {{/each}}
+                {{else}}
+                <div class="card border-0">
+                    <div class="card-body">
+                        <h3 class="card-title">You have not posted any comments yet!</h3>
+                    </div>
+                </div>
+                {{/if}}
+
+            </div>
+        </div>
+    </div>
+</div>

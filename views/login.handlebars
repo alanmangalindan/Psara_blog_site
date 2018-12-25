@@ -1,0 +1,55 @@
+<h1><a class="login-text" href="/" id="signuplink"><img src="/public/education.png" width="70" height="70">  PSARA</a></h1> <div class="row">
+    <div class="col-12">
+        <div class="card my-2 border-0">
+            <div class="card-body">
+                <h3 class="card-title" id="signup">Log in</h3>
+
+                <form action="/login" method="POST">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-control border border-0" for="username">Username:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="text" id="username" name="username" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="form-control border border-0" for="password">Password:</label>
+                        </div>
+                        <div class="col-md-9">
+                            <input class="form-control" type="password" id="password" name="password" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group float-right mt-4">
+                        <button class="btn btn-light" type="submit">Login</button>
+                        <button class="btn btn-light" type="reset">Reset</button>
+                    </div>
+                </form>
+                <p class="mt-5">No account yet? Sign up <a href="/signup">here</a>.</p>
+
+            </div>
+            {{#if loginFail}}
+
+            <div class="alert alert-danger alert-dismissable fade show" role="alert">
+                You could not be logged in with that username or password.
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            {{/if}}
+
+            {{#if newAccountCreated}}
+            <div class="alert alert-success alert-dismissable fade show" role="alert">
+                New Account created. Please log in with your username and password.
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+</div>

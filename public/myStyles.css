@@ -1,0 +1,176 @@
+body{
+    background-color: aliceblue;
+}
+
+.text-white {
+    color: #fff!important;
+    font-weight: bolder;
+    padding-left: 50px;
+}
+nav.navbar {
+    background: rgb(193, 130, 255);
+    font-family: 'Julius Sans One', sans-serif;
+    color: white;
+    position: fixed;
+    font-weight: bold;
+    font: -webkit-small-control;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}
+
+a.navlink, nav.nav-item {
+    color: white;
+    padding: 20px 16px;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+a {
+    color: black;
+}
+
+a.navlink:hover {
+    text-decoration: underline;
+}
+
+#signuplink:hover{
+    text-decoration: none;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Julius Sans One', sans-serif;
+}
+
+p, label, div.alert {
+    font-family: 'Libre Baskerville', serif;
+} 
+
+a.navlink:visited {
+    color: rgba(255,255,255,0.6);
+}
+
+a.articleLink {
+    color: #2e484c;
+}
+
+.btn {
+    font-family: 'Roboto Slab', serif;
+}
+.cardSidebar {
+    background: aliceblue;
+    margin-right: 0%;
+    margin-top: 0%;
+    position: sticky;
+    top: 100px;
+}
+
+#maincontainer {
+    padding-top: 50px;
+    margin-top: 100px;
+    margin-left: 50px;
+    height: 1500px;
+    max-width: 2000px;
+    width: 100%;
+    padding-right: 100px;
+    padding-left: 5px;
+    margin-right: auto;
+    z-index: -1;
+}
+
+.sidebar ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    overflow: hidden;
+    font-family: 'Libre Baskerville', serif;
+}
+
+span.timestamp {
+    font-style: italic;
+    font-size: small;
+    font-weight: bold;
+}
+
+#usernameCheck {
+    font-size: small;
+    color: red;
+    display: none;
+}
+
+#usernameReq {
+    font-size: small;
+}
+
+img.fr-fic {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+  /* CSS to replace hide the radio buttons and display the avatar image instead*/
+.avatarSelector > input {
+    visibility: hidden;
+    position: absolute;
+}
+.avatarSelector > input + img {
+    width: 70px;
+    cursor:pointer;
+    border:2px solid transparent;
+}
+.avatarSelector > input:checked + img {
+    border:2px solid rgba(119, 194, 255, 0.808);
+}
+
+/* Display avatars on page */
+div.imgContainer {
+    width: 40px;
+    height: 40px;
+}
+img.display {
+    width: 100%;
+    height: auto;
+}
+
+audio.gallery-player {
+    width: 250px;
+}
+video{
+    max-width: 100%;
+    height: auto;
+}
+
+.background-image{
+    width: 100%;
+    height: auto;
+}
+
+.team-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: aliceblue;
+    color: black;
+    text-align: center;
+ }
+
+  iframe{
+    max-width: 100%;
+    max-height: 340px;
+  }
+
+   .alert-success {
+    margin-top: -2rem;
+    padding: 1rem 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    background-color: lightgreen;
+    font-style: italic;
+} 
+ .alert-danger {
+    margin-top:5px;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    background-color:pink;
+    font-style: italic;
+} 
