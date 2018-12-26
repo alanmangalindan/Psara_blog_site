@@ -1,6 +1,6 @@
-body{
+/* body{
     background-color: aliceblue;
-}
+} */
 
 .text-white {
     color: #fff!important;
@@ -8,7 +8,7 @@ body{
     padding-left: 50px;
 }
 nav.navbar {
-    background: rgb(193, 130, 255);
+    background: #2d6360;
     font-family: 'Julius Sans One', sans-serif;
     color: white;
     position: fixed;
@@ -57,7 +57,7 @@ a.articleLink {
     font-family: 'Roboto Slab', serif;
 }
 .cardSidebar {
-    background: aliceblue;
+    background: rgb(232, 239, 235);
     margin-right: 0%;
     margin-top: 0%;
     position: sticky;
