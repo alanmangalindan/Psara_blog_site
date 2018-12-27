@@ -5,3 +5,13 @@ public/uploads/
 **/.DS_Store
 blog-db.db
 *.db
+
+/log/*.log
+/tmp
+.DS_Store
+.idea/
+.sass-cache
+*~
+node_modules
+*.out
+oauth.js
