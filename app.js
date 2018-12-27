@@ -76,12 +76,23 @@ var localStrategy = new LocalStrategy(function (username, password, done) {
 
 });
 
+// From documentation: (https://github.com/jaredhanson/passport)
+// Sessions
+// Passport will maintain persistent login sessions. In order for persistent sessions to work,
+// the authenticated user must be serialized to the session, and deserialized when subsequent requests are made.
+
+// Passport does not impose any restrictions on how your user records are stored.
+// Instead, you provide functions to Passport which implements the necessary serialization and deserialization logic.
+// In a typical application, this will be as simple as serializing the user ID, and finding the user by ID when deserializing.
+
 // method to be called to save the currently logged in username to the session
+// Note: The Username must be serialized
 passport.serializeUser(function (user, done) {
     done(null, user.username);
 });
 
 // method to be called to retrieve all data in the database related to the provided username
+// Note: All details related to the User must be deserialized, hence done(null, USER)
 passport.deserializeUser(function (username, done) {
 
     // query the blog database for the supplied username
@@ -93,6 +104,41 @@ passport.deserializeUser(function (username, done) {
 
 // passport should use the 'local strategy' for authentication
 passport.use('local', localStrategy);
+
+// add oauth.js
+var config = require('./oauth.js');
+
+// add google OAuth2 authentication Strategy
+var GoogleStrategy = require('passport-google-oauth2').Strategy;
+
+passport.use(new GoogleStrategy({
+    clientID: config.google.clientID,
+    clientSecret: config.google.clientSecret,
+    callbackURL: config.google.callbackURL,
+    passReqToCallback: true
+},
+    function (request, accessToken, refreshToken, profile, done) {
+        dao.getUser(profile.id, function (user) {
+            if (user !== null) {
+                done(null, user);
+            } else {
+                var newUserWithGoogleAuth = {
+                    username: profile.id,
+                    password: "hcidmoiw=+903398402_--_--[){}SoMeUnHaCkAbLeVaLuE",
+                    fname: profile.name.givenName,
+                    lname: profile.name.familyName,
+                    activeFlag: 1,
+                    avatar: '1.png',
+                    dob: 'user to update',
+                    country: 'user to update'
+                }
+                dao.createUser(newUserWithGoogleAuth, function (err, newUserLogsIn) {
+                    done(null, newUserLogsIn);
+                });
+            }
+        });
+    }
+));
 
 // initialise passport
 app.use(passport.initialize());
@@ -553,6 +599,21 @@ app.post('/login', passport.authenticate('local', {
     failureRedirect: '/login?loginFail=true'
 }));
 
+// Google Auths routes
+app.get('/auth/google',
+    passport.authenticate('google', {
+        scope: [
+            'https://www.googleapis.com/auth/plus.login',
+            'https://www.googleapis.com/auth/plus.profile.emails.read'
+        ]
+    }
+    ));
+app.get('/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: '/' }),
+    function (req, res) {
+        res.redirect('/home');
+    });
+
 app.get('/logout', function (req, res) {
     req.logout();
     res.redirect("/home?loggedOut=true");
@@ -948,7 +1009,7 @@ app.use(function (req, res) {
 app.use(function (req, res) {
     res.type('text/html');
     res.status(500);
-    res.send("500 Internal Server Error. Sorry our bad, we're still learning. <a href="/">Click here</a> to return to the homepage.");
+    res.send("500 Internal Server Error. Sorry our bad, we're still learning. <a href=" / ">Click here</a> to return to the homepage.");
 });
 
 // Start the server running.
